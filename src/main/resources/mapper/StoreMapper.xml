@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alliswell.mapper.StoreMapper">
+    <resultMap id="storeMap" type="store">
+        <id property="id" column="s_id"/>
+        <result property="residueGoods" column="s_residue"/>
+        <result property="unDeliverGoods" column="s_undeliver"/>
+        <result property="deliveredGoods" column="s_delivered"/>
+        <association property="goods" javaType="com.alliswell.pojo.Goods" select="com.alliswell.mapper.GoodsMapper.selById" column="g_id"/>
+    </resultMap>
+    <select id="selByPaging" resultMap="storeMap">
+        select * from t_store limit #{param1},#{param2}
+    </select>
+    <select id="selCount" resultType="int">
+        select count(s_id) from t_store
+    </select>
+    <select id="selByCondition" resultMap="storeMap">
+        select s.s_id,s.g_id,s.s_residue,s.s_undeliver,s.s_delivered from t_store s join t_goods g on s.g_id = g.g_id
+        <if test="param1 != null and param1 != ''">
+            <where>
+                <choose>
+                    <when test="param1=='id'">
+                        s.g_id = #{param2,jdbcType=INTEGER}
+                    </when>
+                    <when test="param1 == 'name'">
+                        g.g_name like concat('%',#{param2,jdbcType=VARCHAR},'%')
+                    </when>
+                    <when test="param1 == 'category'">
+                        g.c_id = (select c_id from t_category c where c.c_name = #{param2,jdbcType=VARCHAR} )
+                    </when>
+                    <when test="param1 == 'brand'">
+                        g.b_id = (select b_id from t_brand b where b.b_name = #{param2,jdbcType=VARCHAR})
+                    </when>
+                </choose>
+            </where>
+        </if>
+    </select>
+    <select id="selById" parameterType="int" resultMap="storeMap">
+        select * from t_store where s_id = #{id}
+    </select>
+    <update id="updStoreRepertory">
+        update t_store set s_residue = #{addedRepertory} where s_id = #{sId} and g_id = #{gId}
+    </update>
+</mapper>

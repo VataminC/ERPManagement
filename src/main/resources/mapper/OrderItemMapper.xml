@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alliswell.mapper.OrderItemMapper">
+    <resultMap id="orderItemMap" type="orderItem">
+        <id property="id" column="oi_id"/>
+        <result property="goodsNumber" column="oi_goods_number"/>
+        <result property="totalMoney" column="oi_total_money"/>
+        <result property="orderId" column="oi_orderId"/>
+        <association property="goods" select="com.alliswell.mapper.GoodsMapper.selById" column="g_id"/>
+    </resultMap>
+    <insert id="insert" parameterType="list">
+        insert into t_orderitem(g_id,oi_goods_number,oi_total_money,oi_orderId) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.goods.id},
+            #{item.goodsNumber},
+            #{item.totalMoney,jdbcType=DECIMAL},
+            #{item.orderId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <select id="selByGoodsId" resultMap="orderItemMap">
+        select * from t_orderitem where g_id = #{id}
+    </select>
+    <select id="selByOrderId" resultMap="orderItemMap">
+        select * from t_orderitem where oi_orderId = #{id}
+    </select>
+</mapper>

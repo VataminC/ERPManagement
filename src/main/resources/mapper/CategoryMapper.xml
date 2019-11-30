@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alliswell.mapper.CategoryMapper">
+    <resultMap id="categoryMap" type="category">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+    </resultMap>
+    <select id="selById" parameterType="int" resultMap="categoryMap">
+        select * from t_category where c_id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selAll" resultMap="categoryMap">
+        select * from t_category
+    </select>
+
+    <select id="selCount" resultType="int">
+        select count(c_id) from t_category
+    </select>
+    <select id="selPaging" resultMap="categoryMap">
+        select * from t_category limit #{param1},#{param2}
+    </select>
+    <update id="udpCategory" parameterType="Category">
+        update t_category
+        <set>
+            <if test="name != null and name != ''">
+                c_name = #{name,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where c_id = #{id}
+    </update>
+    <insert id="insCategory" parameterType="string">
+        insert into t_category(c_name) value(#{name,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>
