@@ -2,7 +2,7 @@ package com.alliswell.service.impl;
 
 import com.alliswell.mapper.GoodsMapper;
 import com.alliswell.pojo.Goods;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 import com.alliswell.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +42,10 @@ public class GoodsServiceImpl implements GoodsService {
      * @param content
      * @return
      */
-    public PageBean search(String condition,String content){
+    @Override
+    public PageBean selByCondition(String condition,String content){
         List<Goods> goods = goodsMapper.selByType(condition, content);
-        PageBean pagebean = new PageBean(1,goods.size());
-        //当前页数
+        PageBean pagebean = new PageBean(1,goods.size(),8);
         pagebean.setBeanList(goods);
         return pagebean;
     }
@@ -77,6 +77,14 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void insGoods(Goods goods) {
         goodsMapper.insGoods(goods);
+    }
+
+    @Override
+    public PageBean selectLike(String content) {
+        List<Goods> goods = goodsMapper.selLike(content);
+        PageBean pageBean = new PageBean(1,goods.size(),8);
+        pageBean.setBeanList(goods);
+        return pageBean;
     }
 
 }

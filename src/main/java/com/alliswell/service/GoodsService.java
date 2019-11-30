@@ -1,7 +1,7 @@
 package com.alliswell.service;
 
 import com.alliswell.pojo.Goods;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface GoodsService {
 
     PageBean paging(int pageStart, int pageNumber);
 
-    PageBean search(String condition,String content);
+    PageBean selByCondition(String condition,String content);
 
     void delById(int id);
 
@@ -19,4 +19,6 @@ public interface GoodsService {
     void updGoods(Goods goods);
 
     void insGoods(Goods goods);
+
+    PageBean selectLike(String content);
 }

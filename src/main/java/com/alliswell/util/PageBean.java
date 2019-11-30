@@ -1,24 +1,37 @@
-package com.alliswell.pojo;
+package com.alliswell.util;
 
 import java.util.List;
 
 public class PageBean<T> {
-    //当前页
+
+    /**
+     * 当前页
+     */
     private int pageNumber = 1;
 
-    //总页数=总条数/每页显示的条数
+    /**
+     * 总页数
+     */
     private int totalPage;
 
-    //总记录数
+    /**
+     * 总记录数
+     */
     private int totalCount;
 
-    //每页显示的记录条数
+    /**
+     * 每页显示的记录条数
+     */
     private int pageSize;
 
-    //每页显示的记录条数
+    /**
+     * 每页显示的记录条数
+     */
     private List<T> beanList;
 
-    //默认每页显示8条数据
+    /**
+     * 默认每页显示8条数据
+     */
     private final int DEFAULT_PAGESIZE=8;
 
     public PageBean(int pageNumber,int totalCount,int pageSize){

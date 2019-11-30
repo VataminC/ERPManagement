@@ -18,24 +18,30 @@
         select * from t_goods limit #{param1},#{param2}
     </select>
     <select id="selCount" resultType="int">
-        select count(*) from t_goods
+        select count(g_id) from t_goods
     </select>
     <select id="selByType" resultMap="goodsMap">
         select * from t_goods
             <where>
                 <choose>
                     <when test="param1=='id' and param2 != null and param2 != ''">
-                        and g_id = #{param2}
+                        g_id = #{param2}
                     </when>
                     <when test="param1=='name' and param2 != null and param2 != ''">
-                        and g_name like concat('%',#{param2},'%')
+                        or g_name like concat('%',#{param2},'%')
                     </when>
                     <when test="param1=='category' and param2 != null and param2 != ''">
-                        and c_id = (select c_id from t_category where c_name like concat('%',#{param2},'%'))
+                        or c_id = (select c_id from t_category where c_name like concat('%',#{param2},'%'))
                     </when>
                     <when test="param1=='brand' and param2 != null and param2 != ''">
-                        and b_id = (select b_id from t_brand where b_name like concat('%',#{param2},'%'))
+                        or b_id = (select b_id from t_brand where b_name like concat('%',#{param2},'%'))
                     </when>
+                    <otherwise>
+                        or g_id = #{param2}
+                        or g_name like concat('%',#{param2,javaType=string},'%')
+                        or c_id = (select c_id from t_category where c_name like concat('%',#{param2,javaType=string},'%'))
+                        or b_id = (select b_id from t_brand where b_name like concat('%',#{param2,javaType=string},'%'))
+                    </otherwise>
                 </choose>
             </where>
     </select>
@@ -59,4 +65,12 @@
     <insert id="insGoods" parameterType="goods">
         insert into t_goods(g_name,c_id,b_id,g_price) value(#{name,jdbcType=VARCHAR},#{category.id},#{brand.id},#{price,jdbcType=DECIMAL})
     </insert>
+    <select id="selLike" resultMap="goodsMap">
+        select * from t_goods
+        where
+        g_id = #{param2} or
+        g_name like concat('%',#{param2,javaType=string},'%') or
+        c_id = (select c_id from t_category where c_name like concat('%',#{param2,javaType=string},'%')) or
+        b_id = (select b_id from t_brand where b_name like concat('%',#{param2,javaType=string},'%'))
+    </select>
 </mapper>

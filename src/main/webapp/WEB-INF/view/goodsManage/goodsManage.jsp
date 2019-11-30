@@ -31,7 +31,7 @@
             <strong style="margin-left: 20px">按</strong>
             <div style=" width:100px;" class="layui-input-inline">
                 <select name="condition">
-                    <option disabled>请选择</option>
+                    <option value="" selected>请选择</option>
                     <option value="id">id</option>
                     <option value="name">商品名称</option>
                     <option value="category">类别</option>
@@ -92,13 +92,13 @@
                 </c:if> class="layui-input-inline">
             <button id="next" class="layui-btn layui-btn-sm layui-btn-normal" type="button" >下一页</button>
         </a>
-        <strong>共&nbsp${pageBean.totalCount}&nbsp,&nbsp${pageBean.totalPage}&nbsp页</strong>
+        <strong>共&nbsp${pageBean.totalCount}&nbsp条,&nbsp${pageBean.totalPage}&nbsp页</strong>
         <strong style="margin-left: 100px">跳转到</strong>
         <div class="layui-input-inline">
-            <input id="jump" name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input">
+            <input id="jump" name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input" oninput="if(value>${pageBean.totalPage}){value=${pageBean.totalPage};}else if(value<=1){value=1;}">
         </div>
         <strong>页</strong>
-        <button id="jump_btn"  class="layui-input-inline layui-btn layui-btn-sm layui-btn-normal" type="submit" >跳转</button>
+        <button id="jump_btn"  class="layui-input-inline layui-btn layui-btn-sm layui-btn-normal" type="submit">跳转</button>
     </form>
 </body>
 <script src="<%=basePath%>/static/layui/layui.all.js"></script>
@@ -111,7 +111,7 @@
     function deleteDo(goods_ids){
         layer.open({
             title:'警告！',
-            content:"是否要删除该商品？",
+            content:"是否要删除该商品？（删除后将删除商品的库存）",
             btn:['确定','取消'],
             btn1:function(index,layero){
                 $.ajax({
@@ -136,6 +136,9 @@
                 layer.close(index);
             }
         });
+    };
+    function checkIn(){
+
     }
 </script>
 </html>

@@ -15,11 +15,13 @@ public interface GoodsMapper {
 
     List<Goods> selByType(String condition,String content);
 
-    void delById(@Param("id") int id);
+    void delById(int id);
 
     Goods selById(int id);
 
     void updGoods(Goods goods);
 
     void insGoods(Goods goods);
+
+    List<Goods> selLike(String content);
 }

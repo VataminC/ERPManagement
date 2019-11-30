@@ -25,7 +25,7 @@
         update t_category
         <set>
             <if test="name != null and name != ''">
-                c_name = #{name,jdbcType=VARCHAR}
+                c_name = #{name,jdbcType=VARCHAR,javaType=string}
             </if>
         </set>
         where c_id = #{id}
@@ -33,5 +33,7 @@
     <insert id="insCategory" parameterType="string">
         insert into t_category(c_name) value(#{name,jdbcType=VARCHAR})
     </insert>
-
+    <delete id="delById">
+        delete from t_category where c_id = #{cId}
+    </delete>
 </mapper>

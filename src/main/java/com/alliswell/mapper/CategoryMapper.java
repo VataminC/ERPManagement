@@ -16,4 +16,6 @@ public interface CategoryMapper {
     void udpCategory(Category category);
 
     void insCategory(String name);
+
+    void delById(int cId);
 }

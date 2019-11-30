@@ -24,7 +24,7 @@
         <table id="" style="text-align: center" class="layui-table">
             <thead>
             <tr>
-                <th width="10% ">id</th>
+                <th width="10%">id</th>
                 <th>品牌名称</th>
                 <th width="24%">操作</th>
             </tr>
@@ -55,10 +55,10 @@
                     </c:if> class="layui-input-inline">
                 <button id="next" class="layui-btn layui-btn-sm layui-btn-normal" type="button" >下一页</button>
             </a>
-            <strong>共&nbsp${pageBean.totalCount}&nbsp,&nbsp${pageBean.totalPage}&nbsp页</strong>
+            <strong>共&nbsp${pageBean.totalCount}&nbsp条,&nbsp${pageBean.totalPage}&nbsp页</strong>
             <strong style="margin-left: 100px">跳转到</strong>
             <div class="layui-input-inline">
-                <input name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input">
+                <input name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input" oninput="if(value>${pageBean.totalPage}){value=${pageBean.totalPage};}else if(value<=1){value=1;}">
             </div>
             <strong>页</strong>
             <button class="layui-input-inline layui-btn layui-btn-sm layui-btn-normal" type="submit" >跳转</button>
@@ -106,16 +106,14 @@
         </div>
     </div>
 </body>
-<script src="<%=basePath%>/static/layui/layui.js"></script>
-<script src="<%=basePath%>/static/js/jquery-3.4.1.js"/>
+<script src="<%=basePath%>/static/layui/layui.all.js"></script>
+<script src="<%=basePath%>/static/js/jquery-3.4.1.js"></script>
 <script>
-    layui.use('table', function() {
-        var table = layui.table;
-    });
     function deleteDo(b_id){
+        var layer = layui.layer;
         layer.open({
             title:'警告！',
-            content:"是否要删除该商品？",
+            content:"是否要删除该品牌？（如果该品牌下有商品，此操作将会失败）",
             btn:['确定','取消'],
             btn1:function(index,layero){
                 $.ajax({

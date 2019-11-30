@@ -2,7 +2,7 @@ package com.alliswell.service.impl;
 
 import com.alliswell.mapper.BrandMapper;
 import com.alliswell.pojo.Brand;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 import com.alliswell.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

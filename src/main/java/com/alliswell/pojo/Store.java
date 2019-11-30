@@ -62,8 +62,8 @@ public class Store {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Store)) return false;
+        if (this == o) {return true;}
+        if (!(o instanceof Store)) {return false;}
         Store store = (Store) o;
         return id == store.id &&
                 residueGoods == store.residueGoods &&

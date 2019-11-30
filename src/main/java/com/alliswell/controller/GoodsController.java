@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alliswell.pojo.Brand;
 import com.alliswell.pojo.Category;
 import com.alliswell.pojo.Goods;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 import com.alliswell.service.BrandService;
 import com.alliswell.service.CategoryService;
 import com.alliswell.service.GoodsService;
@@ -38,9 +38,15 @@ public class GoodsController {
     }
     @RequestMapping(value = "search")
     public String search(String condition,String content,Model model){
-        PageBean pageBean = goodsServiceImpl.search(condition, content);
-        model.addAttribute("pageBean",pageBean);
-        return "view/goodsManage/goodsManage";
+        if(("".equals(condition) || condition == null) && ("".equals(content) || content==null)){
+            return "redirect:paging";
+        }else if(("".equals(condition) || condition == null) && (!"".equals(content) || content!=null)){
+            model.addAttribute("pageBean",goodsServiceImpl.selectLike(content));
+            return "view/goodsManage/goodsManage";
+        }else{
+            model.addAttribute("pageBean",goodsServiceImpl.selByCondition(condition, content));
+            return "view/goodsManage/goodsManage";
+        }
     }
     @RequestMapping(value = "deleteGoods")
     public String deleteDo(int g_id){

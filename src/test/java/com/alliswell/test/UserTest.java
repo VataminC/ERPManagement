@@ -6,9 +6,11 @@ import com.alliswell.mapper.CategoryMapper;
 import com.alliswell.mapper.GoodsMapper;
 import com.alliswell.mapper.UserMapper;
 import com.alliswell.pojo.Goods;
+import com.alliswell.pojo.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +48,6 @@ public class UserTest extends UserTestBase {
     }
     @Test
     public void testRedis(){
-
     }
 
 }

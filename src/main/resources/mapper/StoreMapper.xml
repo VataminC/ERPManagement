@@ -25,13 +25,13 @@
                         s.g_id = #{param2,jdbcType=INTEGER}
                     </when>
                     <when test="param1 == 'name'">
-                        g.g_name like concat('%',#{param2,jdbcType=VARCHAR},'%')
+                        or g.g_name like concat('%',#{param2,jdbcType=VARCHAR},'%')
                     </when>
                     <when test="param1 == 'category'">
-                        g.c_id = (select c_id from t_category c where c.c_name = #{param2,jdbcType=VARCHAR} )
+                        or g.c_id = (select c_id from t_category c where c.c_name = #{param2,jdbcType=VARCHAR} )
                     </when>
                     <when test="param1 == 'brand'">
-                        g.b_id = (select b_id from t_brand b where b.b_name = #{param2,jdbcType=VARCHAR})
+                        or g.b_id = (select b_id from t_brand b where b.b_name = #{param2,jdbcType=VARCHAR})
                     </when>
                 </choose>
             </where>
@@ -42,5 +42,11 @@
     </select>
     <update id="updStoreRepertory">
         update t_store set s_residue = #{addedRepertory} where s_id = #{sId} and g_id = #{gId}
+    </update>
+    <update id="updUnDeliverRepertory">
+        update t_store set s_undeliver = s_undeliver+#{param2} where g_id = #{param1}
+    </update>
+    <update id="updDeliveredRepertory">
+        update t_store set s_delivered = s_delivered+#{param2} where g_id = #{param1}
     </update>
 </mapper>

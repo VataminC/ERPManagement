@@ -4,15 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alliswell.mapper.UserMapper">
     <resultMap id="userMap" type="com.alliswell.pojo.User">
-        <id property="uId" column="u_id"/>
-        <result property="uName" column="u_name"/>
-        <result property="uPwd" column="u_pwd"/>
+        <id property="id" column="u_id"/>
+        <result property="name" column="u_name"/>
+        <result property="pwd" column="u_pwd"/>
     </resultMap>
     <select id="selByUser" parameterType="user" resultMap="userMap">
-        select * from t_user where u_id=#{uId} and u_pwd = #{uPwd}
+        select * from t_user where u_name=#{name} and u_pwd = #{pwd,jdbcType=VARCHAR}
     </select>
 
     <select id="selById" parameterType="int" resultMap="userMap">
         select * from t_user where u_id = #{id}
     </select>
+
+    <select id="selByName" parameterType="string" resultMap="userMap">
+        select * from t_user where u_name = #{name,jdbcType=VARCHAR}
+    </select>
+    <insert id="insUser" parameterType="user">
+        insert into t_user (U_name,u_pwd) value(#{name,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR})
+    </insert>
 </mapper>

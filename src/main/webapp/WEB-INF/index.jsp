@@ -20,17 +20,17 @@
 <body>
 <div  style="width:100%;height:200px;margin-top: 5%;">
     <label>
-        <span style="font-size:150px;color:#393D49;margin: 0% 30%;">Welcome</span>
+        <span style="font-size:150px;color:#393D49;margin: 0 30%;">Welcome</span>
     </label>
 </div>
-<div  style="width:500px;height:220px;margin:0% 34% ;">
+<div  style="width:500px;height:220px;margin: 0 34% ;">
     <form class="layui-form layui-form-pane" action="<%=basePath%>/login/login" method="post">
         <div style="margin-left: 20%;margin-top: 5%;" class="layui-form-item">
             <label class="layui-form-label">用户名：</label>
-            <div style="width:45%" class="layui-input-block">
-                <input name="name" type="text" required lay-verify="required" placeholder="请输入你的用户名 " class="layui-input">${message}
+            <div style="width:45%" class="layui-input-inline">
+                <input name="name" type="text" required lay-verify="required" placeholder="请输入你的用户名 " class="layui-input">
             </div>
-            <span style="color:red;fontsize:10px">${message}</span>
+            <span style="color:red;fontsize:10px" class="layui-input-inline">${message}</span>
         </div>
         <div style="margin-left: 20%" class="layui-form-item">
             <label class="layui-form-label">密码：</label>
@@ -43,11 +43,11 @@
         </div>
         <div class="layui-form-item">
             <div style="margin-left:20%" class="layui-input-inline">
-                <button type="submit" class="layui-btn layui-bg-black">登录</button>
+                <button type="submit" class="layui-btn layui-bg-cyan">登录</button>
             </div>
             <div class="layui-input-inline">
                 <a href="javascript:;" type="button" >
-                    <button type="button" class="layui-btn layui-bg-black" onclick="register()">注册</button>
+                    <button type="button" class="layui-btn layui-bg-cyan" onclick="register()">注册</button>
                 </a>
             </div>
         </div>
@@ -64,6 +64,6 @@
             content:['<%=basePath%>/login/showRegister','no'],
             area:['500px','300px']
         });
-    }
+    };
 </script>
 </html>

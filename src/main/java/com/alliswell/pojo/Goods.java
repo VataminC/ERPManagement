@@ -74,8 +74,8 @@ public class Goods implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Goods)) return false;
+        if (this == o) {return true;}
+        if (!(o instanceof Goods)) {return false;}
         Goods goods = (Goods) o;
         return Objects.equals(id, goods.id) &&
                 Objects.equals(name, goods.name) &&

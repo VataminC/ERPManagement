@@ -4,7 +4,9 @@ import com.alliswell.pojo.*;
 import com.alliswell.service.GoodsService;
 import com.alliswell.service.OrderItemService;
 import com.alliswell.service.OrderService;
+import com.alliswell.service.StoreService;
 import com.alliswell.util.JsonUtil;
+import com.alliswell.util.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,16 @@ public class OrderController {
     private GoodsService goodsServiceImpl;
     @Autowired
     private OrderItemService orderItemServiceImpl;
+    @Autowired
+    private StoreService storeServiceImpl;
 
+    /**
+     * 库存分页
+     * @param pageSize 页面大小
+     * @param pageNumber 页码
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "paging")
     public String paging(@RequestParam(value = "pageSize",defaultValue ="8",required = false) int pageSize,
                          @RequestParam(value = "pageNumber",defaultValue ="1",required = false) int pageNumber,
@@ -57,11 +68,35 @@ public class OrderController {
         return new ModelAndView("view/orderManage/orderManage");
     }
     @RequestMapping(value = "detail")
-    public ModelAndView orderDetail(String oId){
+    public String orderDetail(String oId,Model model){
         List<OrderItem> orderItems = orderItemServiceImpl.orderDetail(oId);
-        ModelAndView modelAndView =  new ModelAndView();
-        modelAndView.addObject("orderItems",orderItems);
-        modelAndView.setViewName("view/orderManage/orderDetail");
-        return modelAndView;
+        model.addAttribute("orderItems",orderItems);
+        return "view/orderManage/orderDetail";
+    }
+    @RequestMapping(value = "search")
+    public String search(String condition,String content,Model model){
+        if(("".equals(condition) || condition == null) && ("".equals(content) || content==null)){
+            return "redirect:paging";
+        }else{
+            model.addAttribute("pageBean",orderServiceImpl.selectLike(condition,content));
+            return "view/orderManage/orderManage";
+        }
+    }
+    @RequestMapping(value = "print")
+    public String orderPrint(String oId){
+        orderServiceImpl.orderHandle(oId,2);
+        storeServiceImpl.changeRepertory(oId,"print");
+        return "redirect:paging";
+    }
+    @RequestMapping(value = "deliver")
+    public String orderDeliver(String oId){
+        orderServiceImpl.orderHandle(oId,3);
+        storeServiceImpl.changeRepertory(oId,"deliver");
+        return "redirect:paging";
+    }
+    @RequestMapping(value = "delete")
+    public String delete(String oId){
+        orderServiceImpl.deleteById(oId);
+        return "redirect:paging";
     }
 }

@@ -2,7 +2,7 @@ package com.alliswell.service.impl;
 
 import com.alliswell.mapper.CategoryMapper;
 import com.alliswell.pojo.Category;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 import com.alliswell.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +41,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void insCategory(String name) {
         categoryMapper.insCategory(name);
+    }
+
+    @Override
+    public void deleteByCategoryId(int id) {
+        categoryMapper.delById(id);
     }
 
 

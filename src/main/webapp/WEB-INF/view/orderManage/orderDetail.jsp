@@ -39,5 +39,4 @@
     </table>
 </body>
 <script src="<%=basePath%>/static/layui/layui.all.js"></script>
-<script src="<%=basePath%>/static/js/jquery-3.4.1.js"></script>
 </html>

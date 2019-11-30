@@ -12,4 +12,10 @@ public interface OrderMapper {
     int selCount();
 
     void insert(Order order);
+
+    List<Order> selByType(String condition,String content);
+
+    void updOrder(String oId,int status);
+
+    void delById(String id);
 }

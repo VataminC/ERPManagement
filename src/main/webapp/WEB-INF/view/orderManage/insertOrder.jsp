@@ -43,14 +43,14 @@
             </c:forEach>
             </tbody>
         </table>
-        <form class="layui-form" method="post" action="<%=basePath%>/brand/paging">
-            <a href="<%=basePath%>/category/paging?pageNumber=${pageBean.pageNumber-1}&pageSize=${pageBean.pageSize}"
+        <form class="layui-form" method="post" action="<%=basePath%>/order/toInsertPaging">
+            <a href="<%=basePath%>/order/toInsertPaging?pageNumber=${pageBean.pageNumber-1}&pageSize=${pageBean.pageSize}"
                     <c:if test="${pageBean.pageNumber<=1}">
                         onclick="javascript:return false;"
                     </c:if> class="layui-input-inline">
                 <button id="last" class="layui-btn layui-btn-sm layui-btn-normal" type="button" >上一页</button>
             </a>
-            <a href="<%=basePath%>/category/paging?pageNumber=${pageBean.pageNumber+1}&pageSize=${pageBean.pageSize}"
+            <a href="<%=basePath%>/order/toInsertPaging?pageNumber=${pageBean.pageNumber+1}&pageSize=${pageBean.pageSize}"
                     <c:if test="${pageBean.pageNumber>=pageBean.totalPage}">
                         onclick="javascript:return false;"
                     </c:if> class="layui-input-inline">
@@ -59,7 +59,7 @@
             <strong>共&nbsp${pageBean.totalCount}&nbsp,&nbsp${pageBean.totalPage}&nbsp页,</strong>
             <strong style="margin-left: 100px">跳转到</strong>
             <div class="layui-input-inline">
-                <input name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input">
+                <input name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input" oninput="if(value>${pageBean.totalPage}){value=${pageBean.totalPage};}else if(value<=1){value=1;}">
             </div>
             <strong>页</strong>
             <button class="layui-input-inline layui-btn layui-btn-sm layui-btn-normal" type="submit" >跳转</button>
@@ -85,9 +85,8 @@
                 </table>
             </form>
             <button id="createOrder" class="layui-btn layui-btn-normal">生成订单</button>
-            <button id="clear" class="layui-btn layui-btn-normal  layui-input-inline">清空</button>
+            <button id="clear" class="layui-btn layui-btn-danger layui-input-inline">清空</button>
         </div>
-
     </div>
 </body>
 <script src="<%=basePath%>/static/layui/layui.all.js"></script>

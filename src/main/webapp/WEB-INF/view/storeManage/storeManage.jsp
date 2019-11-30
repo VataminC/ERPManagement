@@ -84,7 +84,7 @@
                 </c:if> class="layui-input-inline">
             <button id="next" class="layui-btn layui-btn-sm layui-btn-normal" type="button" >下一页</button>
         </a>
-        <strong>共&nbsp${pageBean.totalCount}&nbsp,&nbsp${pageBean.totalPage}&nbsp页</strong>
+        <strong>共&nbsp${pageBean.totalCount}&nbsp条,&nbsp${pageBean.totalPage}&nbsp页</strong>
         <strong style="margin-left: 100px">跳转到</strong>
         <div class="layui-input-inline">
             <input id="jump" name="pageNumber" lay-verify="number" style="width:50px;height:30px" type="text" class="layui-input">

@@ -6,64 +6,55 @@ import java.util.Objects;
 
 @Component
 public class User {
-    private Integer uId;
-    private String uName;
-    private String uPwd;
+    private Integer id;
+    private String name;
+    private String pwd;
 
     public User() {
     }
 
-    public User(Integer uId, String uName, String uPwd) {
-        this.uId = uId;
-        this.uName = uName;
-        this.uPwd = uPwd;
+    public User(Integer id, String name, String pwd) {
+        this.id = id;
+        this.name = name;
+        this.pwd = pwd;
     }
 
-    public Integer getuId() {
-        return uId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setuId(Integer uId) {
-        this.uId = uId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getuName() {
-        return uName;
+    public String getName() {
+        return name;
     }
 
-    public void setuName(String uName) {
-        this.uName = uName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getuPwd() {
-        return uPwd;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setuPwd(String uPwd) {
-        this.uPwd = uPwd;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (this == o) {return true;}
+        if (!(o instanceof User)) {return false;}
         User user = (User) o;
-        return uId.equals(user.uId) &&
-                uName.equals(user.uName) &&
-                uPwd.equals(user.uPwd);
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(pwd, user.pwd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uId, uName, uPwd);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "uId=" + uId +
-                ", uName='" + uName + '\'' +
-                ", uPwd='" + uPwd + '\'' +
-                '}';
+        return Objects.hash(id, name, pwd);
     }
 }

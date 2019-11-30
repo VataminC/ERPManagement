@@ -12,4 +12,6 @@ public interface OrderItemMapper {
     List<OrderItem> selByGoodsId(int id);
 
     List<OrderItem> selByOrderId(String id);
+
+
 }

@@ -1,7 +1,7 @@
 package com.alliswell.controller;
 
 import com.alliswell.pojo.Category;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 import com.alliswell.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +46,11 @@ public class CategoryController {
     public String insBrand(String insName){
         categoryServiceImpl.insCategory(insName);
         return  "redirect:paging";
+    }
+    @RequestMapping(value = "delete")
+    public String delete(int cId){
+        categoryServiceImpl.deleteByCategoryId(cId);
+        return "redirect:paging";
     }
 
 }

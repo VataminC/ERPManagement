@@ -1,7 +1,7 @@
 package com.alliswell.service;
 
 import com.alliswell.pojo.Brand;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 
 import java.util.List;
 

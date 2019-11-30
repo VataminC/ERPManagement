@@ -1,8 +1,7 @@
 package com.alliswell.service;
 
-import com.alliswell.controller.CategoryController;
 import com.alliswell.pojo.Category;
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 
 import java.util.List;
 
@@ -16,4 +15,6 @@ public interface CategoryService {
     void updCategory(Category category);
 
     void insCategory(String name);
+
+    void deleteByCategoryId(int id);
 }

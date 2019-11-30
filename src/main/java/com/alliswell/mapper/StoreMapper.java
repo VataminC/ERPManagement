@@ -16,4 +16,8 @@ public interface StoreMapper {
     Store selById(int id);
 
     void updStoreRepertory(@Param("sId") int sId,@Param("gId") int gId,@Param("addedRepertory") int addedRepertory);
+
+    void updUnDeliverRepertory(int goodsId,int num);
+
+    void updDeliveredRepertory(int goodsId,int num);
 }

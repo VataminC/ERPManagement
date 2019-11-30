@@ -23,4 +23,27 @@
     <insert id="insert" parameterType="orderItem">
         insert into t_order(o_id,u_id,o_goods_number,o_total_money) value(#{id,javaType=String},#{user.uId},#{goodsNum},#{totalMoney,jdbcType=DECIMAL})
     </insert>
+    <select id="selByType" resultMap="orderMap">
+        select * from t_order
+        <where>
+            <choose>
+                <when test="param1 != null and param1 != '' and param1 == 'id'">
+                    o_id = #{param2,jdbcType=VARCHAR}
+                </when>
+                <when test="param1 != null and param1 != '' and param1 == 'name'">
+                    or u_id = (select u_id from t_user where u_name like concat('%',#{param2},'%'))
+                </when>
+                <otherwise>
+                    or o_id = #{param2,jdbcType=VARCHAR}
+                    or u_id = (select u_id from t_user where u_name like concat('%',#{param2},'%'))
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <update id="updOrder">
+        update t_order set o_status = #{param2} where o_id = #{param1,jdbcType=VARCHAR}
+    </update>
+    <delete id="delById" parameterType="string">
+        delete from t_order where o_id = #{id,jdbcType=VARCHAR}
+    </delete>
 </mapper>

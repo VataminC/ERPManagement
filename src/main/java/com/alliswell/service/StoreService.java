@@ -1,6 +1,6 @@
 package com.alliswell.service;
 
-import com.alliswell.pojo.PageBean;
+import com.alliswell.util.PageBean;
 import com.alliswell.pojo.Store;
 
 public interface StoreService {
@@ -12,4 +12,6 @@ public interface StoreService {
     Store selById(int id);
 
     void addRepertory(int sId,int gId,int addedRepertory);
+
+    void changeRepertory(String oId,String type);
 }

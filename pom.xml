@@ -41,7 +41,7 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
-<!--spring-->
+    <!--spring-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
@@ -49,19 +49,26 @@
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
+      <artifactId>spring-tx</artifactId>
       <version>5.1.7.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
+      <artifactId>spring-jdbc</artifactId>
       <version>5.1.7.RELEASE</version>
     </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>5.1.7.RELEASE</version>
+      </dependency>
+    <!--spring整合mybatis-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>1.3.0</version>
     </dependency>
+    <!--aop相关-->
     <dependency>
       <groupId>aopalliance</groupId>
       <artifactId>aopalliance</artifactId>
@@ -72,51 +79,67 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.6</version>
     </dependency>
+    <!--mybatis-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
       <version>3.5.0</version>
     </dependency>
+    <!--mysql连接-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.15</version>
     </dependency>
+    <!--数据库连接池-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
       <version>1.1.20</version>
     </dependency>
+    <!--ali fastJson-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>1.2.32</version>
     </dependency>
+    <!--log日志包-->
     <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.5</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-fileupload</groupId>
-      <artifactId>commons-fileupload</artifactId>
-      <version>1.2.2</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>2.11.2</version>
-      <type>pom</type>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>2.11.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.11.1</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.10.0</version>
+      <version>2.11.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <version>2.11.1</version>
+    </dependency>
+    <!--mybatis分页插件-->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
       <version>5.1.2</version>
+    </dependency>
+    <!--jackson-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.10.0</version>
     </dependency>
   </dependencies>
 
@@ -135,13 +158,13 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
@@ -159,14 +182,10 @@
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.2</version>
-          <configuration>
-            <url>https://192.168.79.128:8080/manager/text</url>
-<!--            <url>http://localhost:8080/manager/text</url>-->
-            <server>tomcat7</server>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
+    <!--资源放行-->
     <resources>
       <resource>
         <directory>src/main/java</directory>

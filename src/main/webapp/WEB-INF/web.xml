@@ -7,7 +7,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          id="WebApp_ID" version="4.0">
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>/WEB-INF/index.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -41,4 +41,21 @@
     <filter-name>edcoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!--druid的sql监控-->
+  <servlet>
+    <servlet-name>druidServlet</servlet-name>
+    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+    <init-param>
+      <param-name>loginUsername</param-name>
+      <param-value>admin</param-value>
+    </init-param>
+    <init-param>
+      <param-name>loginPassword</param-name>
+      <param-value>123456</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>druidServlet</servlet-name>
+    <url-pattern>/druid/*</url-pattern>
+  </servlet-mapping>
 </web-app>
