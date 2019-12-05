@@ -21,7 +21,7 @@
         select count(o_id) from t_order
     </select>
     <insert id="insert" parameterType="orderItem">
-        insert into t_order(o_id,u_id,o_goods_number,o_total_money) value(#{id,javaType=String},#{user.uId},#{goodsNum},#{totalMoney,jdbcType=DECIMAL})
+        insert into t_order(o_id,u_id,o_goods_number,o_total_money) value(#{id,javaType=String},#{user.id},#{goodsNum},#{totalMoney,jdbcType=DECIMAL})
     </insert>
     <select id="selByType" resultMap="orderMap">
         select * from t_order
