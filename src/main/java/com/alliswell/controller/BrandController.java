@@ -16,41 +16,42 @@ public class BrandController {
     private BrandService brandServiceImpl;
 
     @RequestMapping(value = "toBrandManage")
-    public String toBrandManage(){
+    public String toBrandManage() {
         return "redirect:paging";
     }
 
     @RequestMapping(value = "paging")
-    public String paging(@RequestParam(value = "pageSize",defaultValue ="8",required = false) int pageSize,
-                         @RequestParam(value = "pageNumber",defaultValue ="1",required = false) int pageNumber,
-                         Model model){
+    public String paging(@RequestParam(value = "pageSize", defaultValue = "8", required = false) int pageSize,
+                         @RequestParam(value = "pageNumber", defaultValue = "1", required = false) int pageNumber,
+                         Model model) {
         PageBean pageBean = brandServiceImpl.paging(pageSize, pageNumber);
-        model.addAttribute("pageBean",pageBean);
+        model.addAttribute("pageBean", pageBean);
         return "view/goodsManage/brandManage";
     }
+
     @RequestMapping(value = "toUpdateBrand")
-    public String toUpdateBrand(Model model,int b_id){
+    public String toUpdateBrand(Model model, int b_id) {
         Brand brand = brandServiceImpl.selById(b_id);
-        model.addAttribute("brand",brand);
+        model.addAttribute("brand", brand);
         return "forward:paging";
     }
 
     @RequestMapping(value = "updateBrand")
-    public String updateBrand(int reId, String reName){
-        Brand brand = new Brand(reId,reName);
+    public String updateBrand(int reId, String reName) {
+        Brand brand = new Brand(reId, reName);
         brandServiceImpl.update(brand);
         return "redirect:paging";
     }
 
     @RequestMapping(value = "delete")
-    public String delete(int b_id){
+    public String delete(int b_id) {
         brandServiceImpl.delete(b_id);
         return "redirect:paging";
     }
 
 
     @RequestMapping(value = "insBrand")
-    public String insBrand(String insName){
+    public String insBrand(String insName) {
         brandServiceImpl.insert(insName);
         return "redirect:paging";
     }

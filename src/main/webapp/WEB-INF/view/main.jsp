@@ -2,15 +2,15 @@
 <%@page contentType="text/html; utf-8" pageEncoding="utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-  String path = request.getContextPath();
-  String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>welcome</title>
-  <link rel="stylesheet" href="<%=basePath%>/static/layui/css/layui.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>welcome</title>
+    <link rel="stylesheet" href="<%=basePath%>/static/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -29,7 +29,7 @@
       <li class="layui-nav-item">
         <a href="javascript:;">
           <img src="<%=basePath%>/static/images/personal.jpg" class="layui-nav-img">
-          ${login.name}
+          ${username}
         </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
@@ -68,7 +68,7 @@
 </div>
 
 <div class="layui-body">
-  <iframe class="" style="width:100%;height: 100%;border:none" src="<%=basePath%>/login/welcome" name="iframe"></iframe>
+  <iframe class="" style="width:100%;height: 100%;border:none" src="<%=basePath%>/welcome" name="iframe"></iframe>
 </div>
 
 <div class="layui-footer" style="text-align: left">
@@ -76,6 +76,6 @@
 </div>
 </div>
 <script src="<%=basePath%>/static/layui/layui.all.js"></script>
-<script src= "<%=basePath%>/static/js/jquery-3.4.1.js"></script>
+<script src="<%=basePath%>/static/js/jquery-3.4.1.js"></script>
 </body>
 </html>

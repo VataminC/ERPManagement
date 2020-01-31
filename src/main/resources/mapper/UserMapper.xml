@@ -9,7 +9,7 @@
         <result property="pwd" column="u_pwd"/>
     </resultMap>
     <select id="selByUser" parameterType="user" resultMap="userMap">
-        select * from t_user where u_name=#{name} and u_pwd = #{pwd,jdbcType=VARCHAR}
+        select * from t_user where u_name=#{name,jdbcType=VARCHAR} and u_pwd = #{pwd,jdbcType=VARCHAR}
     </select>
 
     <select id="selById" parameterType="int" resultMap="userMap">
@@ -17,7 +17,7 @@
     </select>
 
     <select id="selByName" parameterType="string" resultMap="userMap">
-        select * from t_user where u_name = #{name,jdbcType=VARCHAR}
+        select * from t_user where u_name = #{name,jdbcType=VARCHAR,javaType=string}
     </select>
     <insert id="insUser" parameterType="user">
         insert into t_user (U_name,u_pwd) value(#{name,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR})

@@ -3,7 +3,7 @@
     <Properties>
         <!-- 日志默认存放的位置,这里设置为项目根路径下,也可指定绝对路径 -->
         <!-- ${web:rootDir}是web项目根路径,java项目没有这个变量,需要删掉,否则会报异常 -->
-        <property name="basePath">${web:rootDir}/log4j2Logs</property>
+        <property name="basePath">${web:rootDir}/Logs</property>
         <!-- <property name="basePath">d:/qfxSpringMVCMybaitsDemoLogs</property> -->
 
         <!-- 控制台默认输出格式,"%-5level":日志级别,"%l":输出完整的错误位置,是小写的L,因为有行号显示,所以影响日志输出的性能 -->

@@ -13,6 +13,7 @@
 %>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>注册</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/static/layui/css/layui.css">
 </head>
@@ -57,8 +58,9 @@
             $.ajax({
                 url: '<%=basePath%>/login/findByName',
                 type: 'post',
+                contentType:'application/json',
                 dataType: 'json',
-                data:JSON.stringify({"uName":username}),
+                data:JSON.stringify({"name":username}),
                 success: function(data){
                     if(data == null){
                         $("#info").text("可以注册").css({'color':'green','font-size':'10px'});
@@ -123,7 +125,6 @@
                 content: '您输入的用户名有误，请重新输入'
             });
         }else{
-            /*$("#registerForm").submit();*/
             var name = $("input[name='uName']").val();
             var pwd = $("input[name='uPwd']").val();
             $.ajax({
@@ -135,7 +136,6 @@
                 success: function(data){
                     var statusObj = data;
                     var status = statusObj.status;
-                    console.log(status);
                     if(status == "success"){
                         layer.msg("注册成功！",{
                             time:0,
@@ -146,7 +146,7 @@
                             }
                         });
                     }else{
-                        layer.alert("未知错误！请重试");
+                        layer.alert("注册失败！请重试");
                         return false;
                     }
                 },
